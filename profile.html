@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>My Profile</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      color: #fff;
+
+      background:
+        radial-gradient(circle at 10% 20%, #6c63ff55, transparent 30%),
+        radial-gradient(circle at 90% 80%, #00d4ff44, transparent 30%),
+        linear-gradient(135deg, #0f1020, #17152f 50%, #0b1d2a);
+    }
+
+    .profile-card {
+      width: 100%;
+      max-width: 950px;
+      padding: 45px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 30px;
+
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+
+      box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+
+      animation: appear 0.8s ease;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .top-section {
+      display: flex;
+      align-items: center;
+      gap: 35px;
+      margin-bottom: 40px;
+    }
+
+    .avatar {
+      width: 150px;
+      height: 150px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      padding: 5px;
+
+      background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+
+      box-shadow: 0 0 35px rgba(99, 102, 241, 0.5);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #15152a;
+    }
+
+    .intro h1 {
+      font-size: 42px;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .intro h1 span {
+      background: linear-gradient(90deg, #a78bfa, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .role {
+      color: #c4b5fd;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .description {
+      max-width: 650px;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .social-links a {
+      text-decoration: none;
+      color: #fff;
+      padding: 9px 16px;
+      border-radius: 50px;
+
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+
+      transition: 0.3s;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, #6366f1, #06b6d4);
+      box-shadow: 0 8px 25px rgba(99,102,241,0.35);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .section {
+      padding: 25px;
+      border-radius: 20px;
+
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .section h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .section h2::before {
+      content: "";
+      display: inline-block;
+      width: 5px;
+      height: 20px;
+      margin-right: 10px;
+      vertical-align: -3px;
+      border-radius: 10px;
+      background: linear-gradient(#8b5cf6, #06b6d4);
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill {
+      padding: 8px 14px;
+      border-radius: 50px;
+      font-size: 14px;
+      color: #ddd6fe;
+
+      background: rgba(139, 92, 246, 0.12);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 15px 5px;
+      border-radius: 15px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 25px;
+      color: #67e8f9;
+    }
+
+    .stat small {
+      color: #94a3b8;
+    }
+
+    .contact {
+      grid-column: 1 / -1;
+      text-align: center;
+    }
+
+    .contact p {
+      color: #cbd5e1;
+      margin-bottom: 20px;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      padding: 13px 28px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 50px;
+
+      background: linear-gradient(135deg, #7c3aed, #0891b2);
+
+      box-shadow: 0 10px 30px rgba(6,182,212,0.25);
+      transition: 0.3s;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 15px 35px rgba(6,182,212,0.4);
+    }
+
+    footer {
+      text-align: center;
+      color: #64748b;
+      margin-top: 30px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 15px;
+      }
+
+      .profile-card {
+        padding: 25px;
+      }
+
+      .top-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .intro h1 {
+        font-size: 32px;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="profile-card">
+
+    <!-- Profile Header -->
+    <section class="top-section">
+
+      <div class="avatar">
+        <img
+          src="https://i.pravatar.cc/300?img=12"
+          alt="Profile picture"
+        >
+      </div>
+
+      <div class="intro">
+        <h1>Hello, I'm <span>Alex</span> 👋</h1>
+
+        <div class="role">
+          Creative Developer • Designer • Problem Solver
+        </div>
+
+        <p class="description">
+          I create beautiful, fast and user-friendly digital experiences.
+          I love turning creative ideas into elegant websites and applications.
+        </p>
+
+        <div class="social-links">
+          <a href="#" target="_blank">GitHub</a>
+          <a href="#" target="_blank">LinkedIn</a>
+          <a href="#" target="_blank">Instagram</a>
+          <a href="#" target="_blank">Twitter</a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Content -->
+    <section class="content-grid">
+
+      <!-- About -->
+      <div class="section">
+        <h2>About Me</h2>
+
+        <p class="description">
+          I'm a passionate developer who enjoys building modern websites,
+          experimenting with new technologies and creating experiences
+          that people love to use.
+          <br><br>
+          When I'm not coding, you'll probably find me exploring new ideas,
+          learning something interesting or enjoying good music.
+        </p>
+      </div>
+
+      <!-- Skills -->
+      <div class="section">
+        <h2>Skills</h2>
+
+        <div class="skills">
+          <span class="skill">HTML</span>
+          <span class="skill">CSS</span>
+          <span class="skill">JavaScript</span>
+          <span class="skill">React</span>
+          <span class="skill">Node.js</span>
+          <span class="skill">Python</span>
+          <span class="skill">UI/UX</span>
+          <span class="skill">Git</span>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="section">
+        <h2>My Journey</h2>
+
+        <div class="stats">
+          <div class="stat">
+            <strong>5+</strong>
+            <small>Years</small>
+          </div>
+
+          <div class="stat">
+            <strong>80+</strong>
+            <small>Projects</small>
+          </div>
+
+          <div class="stat">
+            <strong>25+</strong>
+            <small>Clients</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="section contact">
+        <h2>Let's Connect</h2>
+
+        <p>
+          Have an idea or project in mind? I'd love to hear from you.
+        </p>
+
+        <a class="contact-btn" href="mailto:hello@example.com">
+          Get In Touch →
+        </a>
+      </div>
+
+    </section>
+
+    <footer>
+      © 2026 Alex. Made with ❤️ and code.
+    </footer>
+
+  </main>
+
+</body>
+</html>
